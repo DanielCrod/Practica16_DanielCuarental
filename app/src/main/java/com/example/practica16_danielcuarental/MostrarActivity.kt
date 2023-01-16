@@ -49,7 +49,7 @@ class MostrarActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         val selectedItem = parent?.getItemAtPosition(position) as Articulo
         val item = helper.consultaMulti(selectedItem.toString())
         Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show()
-
+        tusmuerto
         /*val articulo = listView.adapter?.getItem(item.position) as Articulo
         Toast.makeText(this, articulo.codigoArticulo, Toast.LENGTH_LONG).show()
 
