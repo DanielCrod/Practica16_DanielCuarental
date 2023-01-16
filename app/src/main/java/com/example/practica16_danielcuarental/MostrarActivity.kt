@@ -46,10 +46,11 @@ class MostrarActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         val intent1: Intent
         val helper = SqliteHelper(this)
 
-        val selectedItem = parent?.getItemAtPosition(position)
+        val selectedItem = parent?.getItemAtPosition(position) as Articulo
         val item = helper.consultaMulti(selectedItem.toString())
+        Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show()
 
-        val articulo = listView.adapter?.getItem(item.position) as Articulo
+        /*val articulo = listView.adapter?.getItem(item.position) as Articulo
         Toast.makeText(this, articulo.codigoArticulo, Toast.LENGTH_LONG).show()
 
         var intent = Intent(this, DetallesActivity::class.java)
@@ -57,7 +58,7 @@ class MostrarActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         intent.putExtra("Articulo", articulo)
 
         startActivity(intent)
-        onResume()
+        onResume()*/
     }
 
 
