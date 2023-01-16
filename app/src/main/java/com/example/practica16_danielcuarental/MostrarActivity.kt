@@ -43,23 +43,38 @@ class MostrarActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
     }
 
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        val intent1: Intent
-        val helper = SqliteHelper(this)
 
-        val selectedItem = parent?.getItemAtPosition(position) as Articulo
-        val item = helper.consultaMulti(selectedItem.toString())
-        Toast.makeText(this, item.toString(), Toast.LENGTH_SHORT).show()
-        tusmuerto
-        /*val articulo = listView.adapter?.getItem(item.position) as Articulo
-        Toast.makeText(this, articulo.codigoArticulo, Toast.LENGTH_LONG).show()
+        val helper = SqliteHelper(this)
+        val itemSelected = parent?.getItemAtPosition(position)
+        val cursor = helper.consultaMulti(itemSelected.toString())
+        val articulos = ArrayList<Articulo>()
+
+        while (cursor.moveToNext()) {
+            articulos.add(
+                Articulo(
+                    cursor.getString(cursor.getColumnIndexOrThrow(ArticulosContract.CODIGOARTICULO)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(ArticulosContract.NOMBREARTICULO)),
+                    cursor.getDouble(cursor.getColumnIndexOrThrow(ArticulosContract.PVP)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(ArticulosContract.IVA)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(ArticulosContract.PROVEEDOR)),
+
+            ))
+        }
+
+
 
         var intent = Intent(this, DetallesActivity::class.java)
-
-        intent.putExtra("Articulo", articulo)
-
+        intent.putExtra("Articulo", articulos.get(position))
         startActivity(intent)
-        onResume()*/
+        onResume()
+
+
+
     }
 
 
+
+
 }
+
+

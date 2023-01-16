@@ -128,4 +128,6 @@ open class SqliteHelper (context: Context?) :
             db.rawQuery("SELECT * FROM " + ArticulosContract.TABLE_NAME + " WHERE nombreArticulo= '" + nombre + "'",  null)
         return consulta
     }
+
+
 }

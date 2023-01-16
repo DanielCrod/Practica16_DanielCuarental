@@ -17,19 +17,21 @@ class DetallesActivity : AppCompatActivity() {
     private lateinit var pvp : TextView
     private lateinit var txtPVP : TextView
     private lateinit var iva : TextView
-    private lateinit var txtIVA : TextView
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles)
+        txtCodigo = findViewById(R.id.txtCodigo)
+        txtNombre = findViewById(R.id.txtNombre)
 
-       /*if(intent.hasExtra("Articulo")) {
+
+       if(intent.hasExtra("Articulo")) {
             val articulo :Articulo = intent.getSerializableExtra("Articulo") as Articulo
             txtCodigo.setText(articulo.codigoArticulo)
             txtNombre.setText(articulo.nombreArticulo)
-            txtPVP.setText(articulo.pvp)
-            txtIVA.setText(articulo.proveedor)
-        }*/
+
+        }
     }
 }
