@@ -85,8 +85,7 @@ class MostrarActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
 
         var intent = Intent(this, DetallesActivity::class.java)
-        intent.putExtra("Articulo", articulos.get(position))
-        Toast.makeText(this, articulos.get(position).toString(), Toast.LENGTH_SHORT).show()
+        intent.putExtra("Articulo", articulos[0])
         startActivity(intent)
         onResume()
 
