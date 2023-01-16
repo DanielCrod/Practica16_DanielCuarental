@@ -2,8 +2,10 @@ package com.example.practica16_danielcuarental
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.telephony.ims.ImsMmTelManager
 import android.widget.TextView
 import com.example.practica16_danielcuarental.Articulos.Articulo
+import com.example.practica16_danielcuarental.Proveedores.Proveedor
 import org.w3c.dom.Text
 
 class DetallesActivity : AppCompatActivity() {
@@ -18,6 +20,16 @@ class DetallesActivity : AppCompatActivity() {
     private lateinit var txtPVP : TextView
     private lateinit var iva : TextView
 
+    private lateinit var codProveedor: TextView
+    private lateinit var nombreProveedor: TextView
+    private lateinit var direccionProveedor: TextView
+    private lateinit var telefono: TextView
+    private lateinit var provincia: TextView
+    private lateinit var txtCodProveedor: TextView
+    private lateinit var txtNombreProveedor: TextView
+    private lateinit var txtDireccion: TextView
+    private lateinit var txtTelefono: TextView
+    private lateinit var txtProvincia: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,12 +37,40 @@ class DetallesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detalles)
         txtCodigo = findViewById(R.id.txtCodigo)
         txtNombre = findViewById(R.id.txtNombre)
+        producto = findViewById(R.id.producto)
+        txtProducto = findViewById(R.id.txtProducto)
+        codigo = findViewById(R.id.codigo)
+        nombre = findViewById(R.id.Nombre)
+        pvp = findViewById(R.id.PVP)
+        txtPVP = findViewById(R.id.txtPVP)
+        iva = findViewById(R.id.IVA)
+        codProveedor = findViewById(R.id.codProveedor)
+        nombreProveedor = findViewById(R.id.nombreProveedor)
+        direccionProveedor = findViewById(R.id.direccion)
+        telefono = findViewById(R.id.telefono)
+        provincia = findViewById(R.id.provincia)
+        txtCodProveedor = findViewById(R.id.txtCodigoProveedor)
+        txtNombreProveedor = findViewById(R.id.txtNombreProveedor)
+        txtDireccion = findViewById(R.id.txtDireccion)
+        txtTelefono = findViewById(R.id.txtTelefono)
+        txtProvincia = findViewById(R.id.txtProvincia)
 
 
        if(intent.hasExtra("Articulo")) {
             val articulo :Articulo = intent.getSerializableExtra("Articulo") as Articulo
-            txtCodigo.setText(articulo.codigoArticulo)
-            txtNombre.setText(articulo.nombreArticulo)
+            txtProducto.setText(articulo.codigoArticulo)
+            txtCodigo.setText(articulo.nombreArticulo)
+            txtNombre.setText(articulo.pvp.toString())
+            txtPVP.setText(articulo.iva)
+        }
+
+        if(intent.hasExtra("Proveedor")) {
+            val proveedor :Proveedor = intent.getSerializableExtra("Proveedor") as Proveedor
+            txtCodProveedor.setText(proveedor.codigoProveedor)
+            txtNombreProveedor.setText(proveedor.nombreProveedor)
+            txtDireccion.setText(proveedor.direccion)
+            txtTelefono.setText(proveedor.telefono)
+            txtProvincia.setText(proveedor.provincia)
 
         }
     }

@@ -3,7 +3,7 @@ package com.example.practica16_danielcuarental.Proveedores
 import com.example.practica16_danielcuarental.Provincias.Provincia
 import java.util.SplittableRandom
 
-class Proveedor {
+class Proveedor : java.io.Serializable {
 
     var codigoProveedor : String
     var nombreProveedor : String

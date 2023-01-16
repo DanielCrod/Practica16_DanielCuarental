@@ -10,6 +10,7 @@ import android.widget.ListView
 import android.widget.Toast
 import com.example.practica16_danielcuarental.Articulos.Articulo
 import com.example.practica16_danielcuarental.Articulos.ArticulosContract
+import com.example.practica16_danielcuarental.Proveedores.Proveedor
 import com.example.practica16_danielcuarental.Proveedores.ProveedoresContract
 import com.example.practica16_danielcuarental.SQL.SqliteHelper
 
@@ -48,6 +49,7 @@ class MostrarActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         val itemSelected = parent?.getItemAtPosition(position)
         val cursor = helper.consultaMulti(itemSelected.toString())
         val articulos = ArrayList<Articulo>()
+        var proveedores = ArrayList<Proveedor>()
 
         while (cursor.moveToNext()) {
             articulos.add(
@@ -56,15 +58,35 @@ class MostrarActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                     cursor.getString(cursor.getColumnIndexOrThrow(ArticulosContract.NOMBREARTICULO)),
                     cursor.getDouble(cursor.getColumnIndexOrThrow(ArticulosContract.PVP)),
                     cursor.getInt(cursor.getColumnIndexOrThrow(ArticulosContract.IVA)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(ArticulosContract.PROVEEDOR)),
-
+                    cursor.getString(cursor.getColumnIndexOrThrow(ArticulosContract.PROVEEDOR))
             ))
+            proveedores.add(
+                Proveedor(
+                    cursor.getString(cursor.getColumnIndexOrThrow(ProveedoresContract.CODIGOPROVEEDOR)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(ProveedoresContract.NOMBREPROVEEDOR)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(ProveedoresContract.DIRECCION)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(ProveedoresContract.TELEFONO)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(ProveedoresContract.PROVINCIA))
+                )
+            )
         }
 
+        /*while (cursor.moveToNext()) {
+            proveedores.add(
+                Proveedor(
+                    cursor.getString(cursor.getColumnIndexOrThrow(ProveedoresContract.CODIGOPROVEEDOR)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(ProveedoresContract.NOMBREPROVEEDOR)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(ProveedoresContract.DIRECCION)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(ProveedoresContract.TELEFONO)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(ProveedoresContract.PROVINCIA))
+                    )
+            )
+        }*/
 
 
         var intent = Intent(this, DetallesActivity::class.java)
         intent.putExtra("Articulo", articulos.get(position))
+        Toast.makeText(this, articulos.get(position).toString(), Toast.LENGTH_SHORT).show()
         startActivity(intent)
         onResume()
 

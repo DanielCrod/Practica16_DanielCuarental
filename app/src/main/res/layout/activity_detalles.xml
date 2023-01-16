@@ -81,7 +81,7 @@
         android:layout_marginTop="40px"/>
 
     <TextView
-        android:id="@+id/txtProveedor"
+        android:id="@+id/txtCodigoProveedor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/Proveedor"
@@ -95,7 +95,7 @@
         android:layout_below="@+id/Proveedor"/>
 
     <TextView
-        android:id="@+id/txtCodProveedor"
+        android:id="@+id/txtNombreProveedor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/codProveedor"
@@ -109,7 +109,7 @@
         android:layout_below="@+id/codProveedor"/>
 
     <TextView
-        android:id="@+id/txtNombreProveedor"
+        android:id="@+id/txtDireccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/nombreProveedor"
@@ -123,7 +123,7 @@
         android:layout_below="@+id/nombreProveedor"/>
 
     <TextView
-        android:id="@+id/txtDireccion"
+        android:id="@+id/txtTelefono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/direccion"
@@ -137,7 +137,7 @@
         android:layout_below="@+id/direccion"/>
 
     <TextView
-        android:id="@+id/txtTelefono"
+        android:id="@+id/txtProvincia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/telefono"

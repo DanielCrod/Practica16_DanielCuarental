@@ -125,9 +125,10 @@ open class SqliteHelper (context: Context?) :
     fun consultaMulti (nombre: String): android.database.Cursor {
         val db = writableDatabase
         var consulta : android.database.Cursor =
-            db.rawQuery("SELECT * FROM " + ArticulosContract.TABLE_NAME + " WHERE nombreArticulo= '" + nombre + "'",  null)
+            db.rawQuery("SELECT * FROM " + ArticulosContract.TABLE_NAME + " INNER JOIN " + ProveedoresContract.TABLE_NAME + " ON nombreArticulo='" + nombre + "' AND '" + ArticulosContract.PROVEEDOR + "' = '" + ProveedoresContract.CODIGOPROVEEDOR + "'",  null)
         return consulta
     }
+
 
 
 }
