@@ -53,9 +53,9 @@ open class SqliteHelper (context: Context?) :
 
         sqLiteDatabase?.execSQL(
             "INSERT INTO " + ProveedoresContract.TABLE_NAME + " (codigoProveedor, nombreProveedor, direccion, telefono, provincia) VALUES" +
-                    "(1, 'Jose', 'Mojados', 640250241, 1)," +
-                    "(2, 'Pablo', 'Vallecas', 635910716, 2)," +
-                    "(3, 'Paula', 'Argentona', 640250241, 3)"
+                    "('1', 'Jose', 'Mojados', 640250241, 1)," +
+                    "('2', 'Pablo', 'Vallecas', 635910716, 2)," +
+                    "('3', 'Paula', 'Argentona', 640250241, 3)"
         )
 
         sqLiteDatabase?.execSQL(
@@ -67,7 +67,7 @@ open class SqliteHelper (context: Context?) :
                     + ArticulosContract.IVA + " INTEGER NOT NULL,"
                     + ArticulosContract.PROVEEDOR + " TEXT NOT NULL,"
                     + "FOREIGN KEY ("+ ArticulosContract.PROVEEDOR + ") " +
-                    " REFERENCES " + ProveedoresContract.TABLE_NAME + "(" + ProveedoresContract.CODIGOPROVEEDOR
+                    " REFERENCES " + ProveedoresContract.TABLE_NAME + "(" + ProveedoresContract.NOMBREPROVEEDOR
                     +"));"
 
         )
@@ -122,11 +122,27 @@ open class SqliteHelper (context: Context?) :
         return nombresArticulos
     }
 
-    fun consultaMulti (nombre: String): android.database.Cursor {
+    fun consultaMultiple (nombre: String): android.database.Cursor {
         val db = writableDatabase
         var consulta : android.database.Cursor =
-            db.rawQuery("SELECT * FROM " + ArticulosContract.TABLE_NAME + " INNER JOIN " + ProveedoresContract.TABLE_NAME + " ON '" + ArticulosContract.PROVEEDOR + "' = '" + ProveedoresContract.CODIGOPROVEEDOR + "' AND nombreProducto='" + nombre + "'",  null)
+            db.rawQuery("SELECT * FROM " + ArticulosContract.TABLE_NAME + " INNER JOIN " + ProveedoresContract.TABLE_NAME + " ON " + ArticulosContract.PROVEEDOR + " = "+
+                    ProveedoresContract.NOMBREPROVEEDOR + " INNER JOIN " + ProvinciasContract.TABLE_NAME + " ON " + ProveedoresContract.PROVINCIA + " = " +
+                    ProvinciasContract.CODIGOPROVINCIA + " WHERE nombreArticulo = '" + nombre + "'",  null)
         return consulta
+    }
+
+    fun consultaProv (proveedor: String): android.database.Cursor {
+        val db = writableDatabase
+        var consulta : android.database.Cursor =
+            db.rawQuery("SELECT * FROM " + ProveedoresContract.TABLE_NAME + " WHERE codigoProveedor = '" + proveedor + "'", null)
+        return consulta
+    }
+
+    fun verProveedores (proveedor: String): android.database.Cursor {
+        val db = writableDatabase
+        var ArrayProveedores : android.database.Cursor =
+            db.rawQuery("SELECT * FROM " + ProveedoresContract.TABLE_NAME + " WHERE nombreProveedor = '" + proveedor + "'", null)
+        return ArrayProveedores
     }
 
 

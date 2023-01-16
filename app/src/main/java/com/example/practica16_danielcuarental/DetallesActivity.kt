@@ -6,6 +6,9 @@ import android.telephony.ims.ImsMmTelManager
 import android.widget.TextView
 import com.example.practica16_danielcuarental.Articulos.Articulo
 import com.example.practica16_danielcuarental.Proveedores.Proveedor
+import com.example.practica16_danielcuarental.Proveedores.ProveedoresContract
+import com.example.practica16_danielcuarental.Provincias.ProvinciasContract
+import com.example.practica16_danielcuarental.SQL.SqliteHelper
 import org.w3c.dom.Text
 
 class DetallesActivity : AppCompatActivity() {
@@ -61,17 +64,20 @@ class DetallesActivity : AppCompatActivity() {
             txtProducto.setText(articulo.codigoArticulo)
             txtCodigo.setText(articulo.nombreArticulo)
             txtNombre.setText(articulo.pvp.toString())
-            txtPVP.setText(articulo.iva)
-        }
+            txtPVP.setText(articulo.iva.toString())
 
-        if(intent.hasExtra("Proveedor")) {
-            val proveedor :Proveedor = intent.getSerializableExtra("Proveedor") as Proveedor
-            txtCodProveedor.setText(proveedor.codigoProveedor)
-            txtNombreProveedor.setText(proveedor.nombreProveedor)
-            txtDireccion.setText(proveedor.direccion)
-            txtTelefono.setText(proveedor.telefono)
-            txtProvincia.setText(proveedor.provincia)
 
-        }
+        val helper = SqliteHelper(this)
+        val cursor = helper.consultaMultiple(articulo.nombreArticulo)
+
+        if(cursor.getCount() >= 1) {
+            while (cursor.moveToNext()){
+                txtCodProveedor.setText(cursor.getString(cursor.getColumnIndexOrThrow(ProveedoresContract.CODIGOPROVEEDOR)))
+                txtNombreProveedor.setText(cursor.getString(cursor.getColumnIndexOrThrow(ProveedoresContract.NOMBREPROVEEDOR)))
+                txtDireccion.setText(cursor.getString(cursor.getColumnIndexOrThrow(ProveedoresContract.DIRECCION)))
+                txtTelefono.setText(cursor.getString(cursor.getColumnIndexOrThrow(ProveedoresContract.TELEFONO)).toString())
+                txtProvincia.setText(cursor.getString(cursor.getColumnIndexOrThrow(ProvinciasContract.NOMBREPROVINCIA)).toString())
+            }
+        }}
     }
 }
